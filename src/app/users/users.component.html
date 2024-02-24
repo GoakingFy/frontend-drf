@@ -1,18 +1,24 @@
-<p>Usuarios</p>
-<table border="1">
-    <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Correo</th>
-        </tr>
-      </thead>
-	<tbody>
-		<tr *ngFor="let user of resultsUsers">
+
+
+<table class="table ">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Correo</th>
+   
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of resultsUsers" scope="row">
 			<td> {{user.username}}</td>
 			<td> {{user.email}}</td>
 		</tr>
-	</tbody>
+    <tr>
+  
+  </tbody>
 </table>
+
+
 
 
 
