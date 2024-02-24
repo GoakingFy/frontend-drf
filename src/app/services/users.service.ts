@@ -19,6 +19,10 @@ export class UsersService {
       'Authorization': `Basic ${this.token}`
     })
   };
+
+
+  
+
    return this.http.get(this.urlUsers , httpOptions)
   }
 
