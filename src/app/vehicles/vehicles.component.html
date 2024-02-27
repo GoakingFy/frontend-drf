@@ -1,0 +1,73 @@
+<h2>Lista de vehiculos</h2>
+
+<table class="table ">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Chasis</th>
+        <th scope="col">Color</th>
+        <th scope="col">Matricula</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Tipo</th>
+     
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vehicle of resultVehicles" scope="row">
+              <td>{{vehicle.chasis}}</td>
+              <td>{{vehicle.color}}</td>
+              <td>{{vehicle.matricula}}</td>
+              <td>{{vehicle.modelo}}</td>
+              <td>{{vehicle.nombreMarca}}</td>
+              <td>{{vehicle.tipo}}</td>
+              <td>
+                <button class="btn btn-danger" (click)="borrarVehiculo(vehicle)" >Borrar</button>
+              </td>
+              <td>
+              <button class="btn btn-info" (click)="editarVehiculo(vehicle)">Editar</button>
+            </td>
+         
+          </tr>
+      <tr>
+    
+    </tbody>
+  </table>
+  <div class="container d-flex flex-column" *ngIf="editingVehicle">
+    <label> Chasis:</label>
+    <input type="text" [(ngModel)]="editingVehicle.chasis">
+    <label> Color:</label>
+    <input type="text" [(ngModel)]="editingVehicle.color">
+    <label> Matricula:</label>
+    <input type="text" [(ngModel)]="editingVehicle.matricula">
+    <label> Modelo:</label>
+    <input type="text" [(ngModel)]="editingVehicle.modelo">
+    <label> Marca:</label>
+    <input type="text" [(ngModel)]="editingVehicle.nombreMarca">
+    <label> Tipo:</label>
+    <input type="text" [(ngModel)]="editingVehicle.tipo">
+   
+    
+   
+    <button class="btn btn-success" (click)="guardarCambios()">Guardar cambios</button>
+    <button class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
+  </div>
+
+  <div class="container d-flex flex-column" *ngIf="!editingVehicle">
+    <!-- Inputs para agregar un nuevo vehículo -->
+    <h2>Agregar nuevo vehículo</h2>
+    <label> Chasis:</label>
+    <input type="text" [(ngModel)]="nuevoVehiculo.chasis">
+    <label> Color:</label>
+    <input type="text" [(ngModel)]="nuevoVehiculo.color">
+    <label> Matricula:</label>
+    <input type="text" [(ngModel)]="nuevoVehiculo.matricula">
+    <label> Modelo:</label>
+    <input type="text" [(ngModel)]="nuevoVehiculo.modelo">
+    <label> Marca:</label>
+    <input type="text" [(ngModel)]="nuevoVehiculo.nombreMarca">
+    <label> Tipo:</label>
+    <input type="text" [(ngModel)]="nuevoVehiculo.tipo">
+  
+    <button class="btn btn-success" (click)="anadirVehiculo()">Guardar nuevo vehículo</button>
+   <!--  <button class="btn btn-secondary" (click)="cancelarAgregarVehiculo()">Cancelar</button> -->
+  </div>

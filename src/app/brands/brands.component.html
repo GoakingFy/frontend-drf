@@ -1,0 +1,19 @@
+<h2>Lista de marcas</h2>
+
+<table class="table ">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Nombre</th>
+       
+     
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let brand of resultBrands" scope="row">
+              <td>{{brand.nombre}}</td>
+              
+          </tr>
+      <tr>
+    
+    </tbody>
+  </table>

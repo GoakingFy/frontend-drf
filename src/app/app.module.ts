@@ -5,18 +5,27 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
+import { VehiclesComponent } from './vehicles/vehicles.component';
+import { BrandsComponent } from './brands/brands.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    UsersComponent
+    UsersComponent,
+    VehiclesComponent,
+    BrandsComponent,
+   
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration()
