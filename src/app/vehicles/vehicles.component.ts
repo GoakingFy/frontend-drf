@@ -11,29 +11,44 @@ import { subscribe } from 'diagnostics_channel';
 })
 export class VehiclesComponent implements OnInit {
   public resultVehicles: Array<any> = [];
+  public brands: Array<any> = [];
   public editingVehicle: any = null;
+  public loc: string = location.pathname
+  public filters : any = {}
   public nuevoVehiculo: any = {
     tipo: "",
     chasis: "",
     modelo: "",
     matricula: "",
-    color: "ROJO",
-    fecha_fabricacion: "2024-02-02",
-    fecha_matriculacion: "2024-02-16",
-    fecha_baja: "2024-02-17",
-    suspendido: true,
-    marca: "http://172.22.227.215:1337/marcas/1/"
+    color: "",
+    fecha_fabricacion: "",
+    fecha_matriculacion: "",
+    fecha_baja: "",
+    suspendido: null,
+    
   };
   constructor(
     public apiService: ApiService
   ) {}
   ngOnInit(): void {
-    this.apiService.getVehicles().subscribe((data) => {
+    
+    this.apiService.getVehicles(this.filters).subscribe((data) => {
+      this.resultVehicles = data.results;
+      this.fetchBrandName();
+    });
+
+    this.apiService.getAllBrands().subscribe((data)=>{
+      this.brands = data.results
+    })
+  }
+
+
+  filtrar(){
+    this.apiService.getVehicles(this.filters).subscribe((data) => {
       this.resultVehicles = data.results;
       this.fetchBrandName();
     });
   }
-
 
 
   fetchBrandName() {

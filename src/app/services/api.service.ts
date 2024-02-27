@@ -12,7 +12,7 @@ export class ApiService {
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Basic ${this.token}`,
+      Authorization: `Basic ${this.token}`,
     }),
   };
 
@@ -30,20 +30,32 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}/users/`, this.httpOptions);
   }
 
-  getVehicles(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/vehiculos/`, this.httpOptions);
-  }
- 
-  createResource(resourceUrl: string, data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${resourceUrl}/`, data, this.httpOptions);
+  getVehicles(filters: any): Observable<any> {
+    let queryParams = '';
+    if (filters) {
+      Object.keys(filters).forEach((key) => {
+        if (queryParams !== '') {
+          queryParams += '&';
+        }
+        queryParams += `${key}=${filters[key]}`;
+      });
+      queryParams = `?${queryParams}`;
+    }
+    return this.http.get(`${this.apiUrl}/vehiculos/${queryParams}`, this.httpOptions);
   }
 
+  createResource(resourceUrl: string, data: any): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}/${resourceUrl}/`,
+      data,
+      this.httpOptions
+    );
+  }
 
   updateResource(resourceUrl: string, data: any): Observable<any> {
     return this.http.put(resourceUrl, data, this.httpOptions);
   }
 
- 
   deleteResource(resourceUrl: string): Observable<any> {
     return this.http.delete(resourceUrl, this.httpOptions);
   }

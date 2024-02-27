@@ -1,5 +1,15 @@
 <h2>Lista de vehiculos</h2>
 
+<div>
+  <label>Color:</label>
+  <input type="text" [(ngModel)]="filters.color">
+  <label>Modelo:</label>
+  <input type="text" [(ngModel)]="filters.modelo">
+  <label>Marca:</label>
+  <input type="text" [(ngModel)]="filters.marca">
+  <button (click)="filtrar()" >Aplicar filtro</button>
+</div>
+
 <table class="table ">
     <thead class="table-dark">
       <tr>
@@ -9,6 +19,12 @@
         <th scope="col">Modelo</th>
         <th scope="col">Marca</th>
         <th scope="col">Tipo</th>
+        <th scope="col">F_Fab</th>
+        <th scope="col">F_Mat</th>
+        <th scope="col">F_Baja</th>
+        <th scope="col">Susp</th>
+        <th></th>
+        <th></th>
      
       </tr>
     </thead>
@@ -20,11 +36,15 @@
               <td>{{vehicle.modelo}}</td>
               <td>{{vehicle.nombreMarca}}</td>
               <td>{{vehicle.tipo}}</td>
+              <td>{{vehicle.fecha_fabricacion}}</td>
+              <td>{{vehicle.fecha_matriculacion}}</td>
+              <td>{{vehicle.fecha_baja}}</td>
+              <td>{{vehicle.suspendido ? "✔" : "❌"}}</td>
               <td>
-                <button class="btn btn-danger" (click)="borrarVehiculo(vehicle)" >Borrar</button>
+                <button class="btn btn-danger" (click)="borrarVehiculo(vehicle)" *ngIf="loc != '/'" >Borrar</button>
               </td>
               <td>
-              <button class="btn btn-info" (click)="editarVehiculo(vehicle)">Editar</button>
+              <button class="btn btn-info" (click)="editarVehiculo(vehicle)" *ngIf="loc != '/'">Editar</button>
             </td>
          
           </tr>
@@ -32,17 +52,26 @@
     
     </tbody>
   </table>
-  <div class="container d-flex flex-column" *ngIf="editingVehicle">
+  <div class="container d-flex flex-column" *ngIf="editingVehicle && loc != '/'">
+    <h2>Editar Vehiculo</h2>
     <label> Chasis:</label>
     <input type="text" [(ngModel)]="editingVehicle.chasis">
     <label> Color:</label>
     <input type="text" [(ngModel)]="editingVehicle.color">
     <label> Matricula:</label>
     <input type="text" [(ngModel)]="editingVehicle.matricula">
+    <label> Fecha Matriculación:</label>
+    <input type="date" [(ngModel)]="editingVehicle.fecha_matriculacion">
+    <label> Fecha Fabricación:</label>
+    <input type="date" [(ngModel)]="editingVehicle.fecha_fabricacion">
+    <label> Fecha Baja:</label>
+    <input type="date" [(ngModel)]="editingVehicle.fecha_baja">
     <label> Modelo:</label>
     <input type="text" [(ngModel)]="editingVehicle.modelo">
     <label> Marca:</label>
-    <input type="text" [(ngModel)]="editingVehicle.nombreMarca">
+    <select [(ngModel)]="editingVehicle.marca">
+      <option *ngFor="let brand of brands" [value]="brand.url">{{ brand.nombre }}</option>
+    </select>
     <label> Tipo:</label>
     <input type="text" [(ngModel)]="editingVehicle.tipo">
    
@@ -52,8 +81,8 @@
     <button class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
   </div>
 
-  <div class="container d-flex flex-column" *ngIf="!editingVehicle">
-    <!-- Inputs para agregar un nuevo vehículo -->
+  <div class="container d-flex flex-column" *ngIf="!editingVehicle && loc != '/'">
+  
     <h2>Agregar nuevo vehículo</h2>
     <label> Chasis:</label>
     <input type="text" [(ngModel)]="nuevoVehiculo.chasis">
@@ -63,11 +92,21 @@
     <input type="text" [(ngModel)]="nuevoVehiculo.matricula">
     <label> Modelo:</label>
     <input type="text" [(ngModel)]="nuevoVehiculo.modelo">
+    <label> Fecha Matriculación:</label>
+    <input type="date" [(ngModel)]="nuevoVehiculo.fecha_matriculacion">
+    <label> Fecha Fabricación:</label>
+    <input type="date" [(ngModel)]="nuevoVehiculo.fecha_fabricacion">
+    <label> Fecha Baja:</label>
+    <input type="date" [(ngModel)]="nuevoVehiculo.fecha_baja">
     <label> Marca:</label>
-    <input type="text" [(ngModel)]="nuevoVehiculo.nombreMarca">
+    <select [(ngModel)]="nuevoVehiculo.marca">
+      <option *ngFor="let brand of brands" [value]="brand.url">{{ brand.nombre }}</option>
+    </select>
     <label> Tipo:</label>
     <input type="text" [(ngModel)]="nuevoVehiculo.tipo">
+    <label> Suspendido:</label>
+    <input type="checkbox" class="text-align-left" [(ngModel)]="nuevoVehiculo.suspendido">
   
     <button class="btn btn-success" (click)="anadirVehiculo()">Guardar nuevo vehículo</button>
-   <!--  <button class="btn btn-secondary" (click)="cancelarAgregarVehiculo()">Cancelar</button> -->
+ 
   </div>
