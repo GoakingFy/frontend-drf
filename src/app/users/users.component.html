@@ -7,6 +7,8 @@
       <th scope="col">Nombre</th>
       <th scope="col">Correo</th>
       <th scope="col">Grupo</th>
+      <th></th>
+      <th></th>
    
     </tr>
   </thead>
@@ -15,11 +17,29 @@
 			<td> {{user.username}}</td>
 			<td> {{user.email}}</td>
       <td> {{user.groups.length > 0 ? user.groups : 'No se encuentra en ningun grupo'}}</td>
-		</tr>
+      <td>
+        <button class="btn btn-danger" (click)="borrarUsuario(user)" *ngIf="loc != '/'" >Borrar</button>
+      </td>
+     
+    </tr>
     <tr>
   
   </tbody>
 </table>
+
+<div class="container d-flex flex-column" *ngIf="!editingUsuario && loc != '/'">
+  
+  <h2>Agregar nuevo Usuario</h2>
+  <label> Email:</label>
+  <input type="text" [(ngModel)]="nuevoUsuario.email">
+  <label> Grupo:</label>
+  <input type="text" [(ngModel)]="nuevoUsuario.groups">
+  <label> Nombre de usuario:</label>
+  <input type="text" [(ngModel)]="nuevoUsuario.username">
+ 
+  <button class="btn btn-success" (click)="anadirUsuario()">Guardar nuevo Usuario</button>
+
+</div>
 
 
 
