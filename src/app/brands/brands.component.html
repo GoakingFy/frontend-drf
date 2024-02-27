@@ -4,6 +4,8 @@
     <thead class="table-dark">
       <tr>
         <th scope="col">Nombre</th>
+        <th></th>
+        <th></th>
        
      
       </tr>
@@ -11,9 +13,37 @@
     <tbody>
       <tr *ngFor="let brand of resultBrands" scope="row">
               <td>{{brand.nombre}}</td>
-              
+              <td>
+                <button class="btn btn-danger" (click)="borrarMarca(brand)" *ngIf="loc != '/'" >Borrar</button>
+              </td>
+              <td>
+                <button class="btn btn-info" (click)="editarMarca(brand)" *ngIf="loc != '/'">Editar</button>
+              </td>
           </tr>
       <tr>
     
     </tbody>
   </table>
+
+  <div class="container d-flex flex-column" *ngIf="editingMarca && loc != '/'">
+    <h2>Editar Marca</h2>
+    <label> Nombre:</label>
+    <input type="text" [(ngModel)]="editingMarca.nombre">
+
+   
+    <button class="btn btn-success" (click)="guardarCambios()">Guardar cambios</button>
+    <button class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
+  </div>
+
+  
+<div class="container d-flex flex-column" *ngIf="!editingMarca && loc != '/'">
+  
+  <h2>Agregar nueva Marca</h2>
+  <label> Nombre:</label>
+  <input type="text" [(ngModel)]="nuevaMarca.nombre">
+  
+ 
+  <button class="btn btn-success" (click)="anadirMarca()">Guardar nueva Marca</button>
+
+</div>
+
