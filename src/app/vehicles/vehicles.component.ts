@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { subscribe } from 'diagnostics_channel';
 
 
 
@@ -32,10 +31,7 @@ export class VehiclesComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     
-    this.apiService.getVehicles(this.filters).subscribe((data) => {
-      this.resultVehicles = data.results;
-      this.fetchBrandName();
-    });
+    this.obtenerVehiculos()
 
     this.apiService.getAllBrands().subscribe((data)=>{
       this.brands = data.results
@@ -44,12 +40,15 @@ export class VehiclesComponent implements OnInit {
 
 
   filtrar(){
+    this.obtenerVehiculos()
+  }
+
+  obtenerVehiculos(){
     this.apiService.getVehicles(this.filters).subscribe((data) => {
       this.resultVehicles = data.results;
       this.fetchBrandName();
     });
   }
-
 
   fetchBrandName() {
     this.resultVehicles.forEach((vehicle) => {
@@ -96,7 +95,7 @@ export class VehiclesComponent implements OnInit {
   }
 
   anadirVehiculo() {
-    // Aquí puedes agregar lógica para enviar el nuevo vehículo al servidor
+  
     this.apiService.createResource('vehiculos', this.nuevoVehiculo).subscribe(
       (response) => {
         alert('Vehículo añadido correctamente');
