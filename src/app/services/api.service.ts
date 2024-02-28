@@ -41,7 +41,10 @@ export class ApiService {
       });
       queryParams = `?${queryParams}`;
     }
-    return this.http.get(`${this.apiUrl}/vehiculos/${queryParams}`, this.httpOptions);
+    return this.http.get(
+      `${this.apiUrl}/vehiculos/${queryParams}`,
+      this.httpOptions
+    );
   }
 
   createResource(resourceUrl: string, data: any): Observable<any> {
