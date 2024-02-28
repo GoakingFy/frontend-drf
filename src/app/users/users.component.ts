@@ -37,11 +37,12 @@ export class UsersComponent implements OnInit {
     if (confirm('¿Estás seguro de que deseas borrar este usuario?')) {
       this.apiService.deleteResource(usuario.url).subscribe(
         response => {
-         
+          alert('Usuario borrado correctamente')
           console.log('Usuario borrado correctamente');
         },
         error => {
           console.error('Error al borrar el usuario:', error);
+          alert('Error al borrar el usuario:')
         }
       );
     }
@@ -58,6 +59,7 @@ export class UsersComponent implements OnInit {
       },
       (error) => {
         console.error('Error al añadir el Usuario:', error);
+        alert('Error al añadir el Usuario:')
       }
     );
   }

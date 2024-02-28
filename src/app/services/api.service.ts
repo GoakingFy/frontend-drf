@@ -12,7 +12,7 @@ export class ApiService {
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Basic ${this.token}`,
+      Authorization: `Token ${this.token}`,
     }),
   };
 

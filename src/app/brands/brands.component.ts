@@ -32,11 +32,12 @@ export class BrandsComponent implements OnInit {
     if (confirm('¿Estás seguro de que deseas borrar esta marca?')) {
       this.apiService.deleteResource(marca.url).subscribe(
         response => {
-         
+         alert('Marca borrado correctamente')
           console.log('Marca borrado correctamente');
         },
         error => {
           console.error('Error al borrar la marca:', error);
+          alert('Error al borrar la marca:')
         }
       );
     }
@@ -52,6 +53,7 @@ export class BrandsComponent implements OnInit {
       },
       (error) => {
         console.error('Error al añadir la marca:', error);
+        alert('Error al añadir la marca:')
       }
     );
   }
@@ -74,6 +76,7 @@ export class BrandsComponent implements OnInit {
     },
     error => {
       console.error('Error al actualizar la marca:', error);
+      alert('Error al actualizar la marca:')
     }
    )
     this.editingMarca = null;

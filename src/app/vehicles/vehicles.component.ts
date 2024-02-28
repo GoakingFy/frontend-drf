@@ -63,10 +63,11 @@ export class VehiclesComponent implements OnInit {
       this.apiService.deleteResource(vehicle.url).subscribe(
         response => {
          
-          console.log('Vehículo borrado correctamente');
+          alert('Vehículo borrado correctamente');
         },
         error => {
           console.error('Error al borrar el vehículo:', error);
+          alert('Error al borrar el vehículo:')
         }
       );
     }
@@ -89,6 +90,7 @@ export class VehiclesComponent implements OnInit {
     },
     error => {
       console.error('Error al actualizar el vehículo:', error);
+      alert('Error al actualizar el vehículo:')
     }
    )
     this.editingVehicle = null;
@@ -103,6 +105,7 @@ export class VehiclesComponent implements OnInit {
       },
       (error) => {
         console.error('Error al añadir el vehículo:', error);
+        alert('Error al añadir el vehículo:')
       }
     );
   }
