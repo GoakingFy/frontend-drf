@@ -34,6 +34,7 @@ export class BrandsComponent implements OnInit {
         response => {
          alert('Marca borrado correctamente')
           console.log('Marca borrado correctamente');
+          location.reload()
         },
         error => {
           console.error('Error al borrar la marca:', error);

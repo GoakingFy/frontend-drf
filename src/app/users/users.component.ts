@@ -39,6 +39,7 @@ export class UsersComponent implements OnInit {
         response => {
           alert('Usuario borrado correctamente')
           console.log('Usuario borrado correctamente');
+          location.reload()
         },
         error => {
           console.error('Error al borrar el usuario:', error);

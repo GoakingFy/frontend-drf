@@ -64,6 +64,7 @@ export class VehiclesComponent implements OnInit {
         response => {
          
           alert('Vehículo borrado correctamente');
+          location.reload()
         },
         error => {
           console.error('Error al borrar el vehículo:', error);
