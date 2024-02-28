@@ -38,7 +38,7 @@
               <td>{{vehicle.tipo}}</td>
               <td>{{vehicle.fecha_fabricacion}}</td>
               <td>{{vehicle.fecha_matriculacion}}</td>
-              <td>{{vehicle.fecha_baja}}</td>
+              <td>{{vehicle.fecha_baja == null ? 'En circulación' : vehicle.fecha_baja}}</td>
               <td>{{vehicle.suspendido ? "✔" : "❌"}}</td>
               <td>
                 <button class="btn btn-danger" (click)="borrarVehiculo(vehicle)" *ngIf="loc != '/'" >Borrar</button>

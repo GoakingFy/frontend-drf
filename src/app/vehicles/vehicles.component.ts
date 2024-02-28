@@ -22,8 +22,8 @@ export class VehiclesComponent implements OnInit {
     color: "",
     fecha_fabricacion: "",
     fecha_matriculacion: "",
-    fecha_baja: "",
-    suspendido: null,
+    fecha_baja: null,
+    suspendido: false,
     
   };
   constructor(
@@ -97,7 +97,7 @@ export class VehiclesComponent implements OnInit {
   }
 
   anadirVehiculo() {
-  
+  console.log(this.nuevoVehiculo)
     this.apiService.createResource('vehiculos', this.nuevoVehiculo).subscribe(
       (response) => {
         alert('Vehículo añadido correctamente');
